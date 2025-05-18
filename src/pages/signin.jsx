@@ -1,4 +1,4 @@
-import {  Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "../client";
 
@@ -8,6 +8,7 @@ export default function SignIn() {
     password: "",
   });
 
+  let navigate = useNavigate()
   function handleChange(event) {
     setDataForm((prevFormData) => {
       return {
@@ -25,7 +26,8 @@ export default function SignIn() {
         password: dataForm.password,
       });
       console.log(data);
-      if(error) alert(error)
+      if (error) alert(error);
+      navigate("/home");
     } catch (error) {
       alert(error.message);
     }
