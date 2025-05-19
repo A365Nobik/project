@@ -4,15 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
+import SmallPass from "../components/SmalPass";
 
 export default function SignUp() {
   const [dataForm, setDataForm] = useState({
     name: "",
     password: "",
     email: "",
-    phone: "",
   });
   const navigate = useNavigate();
+  const [SmallPass, setSmallPass] = useState(false);
 
   console.log(dataForm);
   function handleChange(event) {
@@ -22,6 +23,12 @@ export default function SignUp() {
         [event.target.name]: event.target.value,
       };
     });
+    if (dataForm.password.length < 5) {
+      setSmallPass(true);
+    }else {
+      setSmallPass(false);
+      
+    }
   }
 
   async function handleSubmitEmail(e) {
@@ -36,13 +43,21 @@ export default function SignUp() {
           },
         },
       });
+      if (dataForm.name === "") alert("Please enter name");
+      if (dataForm.password === "") alert("Please enter password");
+      if (dataForm.password.length < 6)
+        alert("Please enter password incudes 6 or more symbol");
+      if (dataForm.email === "") alert("Please enter email");
+      if (
+        dataForm.name !== "" &&
+        dataForm.password !== "" &&
+        dataForm.password.length >= 6 &&
+        dataForm.email !== ""
+      )
+        alert("Check your Email");
       if (error) throw error;
       console.log(data);
       navigate("/");
-      if (dataForm.email === "") alert("Please enter email");
-      else alert("Check your Email");
-      if (dataForm.name === "") alert("Please enter name");
-      if (dataForm.password === "") alert("Please enter password");
     } catch (error) {
       alert(error.massage);
     }
@@ -61,6 +76,8 @@ export default function SignUp() {
             className="flex justify-center items-center flex-col gap-2 "
             onSubmit={handleSubmitEmail}
           >
+              {SmallPass ? <h1>Min password length is  6 symbols</h1> : null}
+            
             <div
               className="flex flex-col justify-center items-center
             gap-2 ml-5 pr-3 "
@@ -75,7 +92,6 @@ export default function SignUp() {
                 />
                 <FaUser />
               </div>
-
               <div className="gap-1 flex justify-center items-center">
                 <input
                   className="border-[#1a1a1a] border-2 outline-0"

@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "../client";
-
+import SmallPass from "../components/SmalPass";
 export default function SignIn({ setDataToken }) {
   const [dataForm, setDataForm] = useState({
     email: "",
@@ -17,6 +17,7 @@ export default function SignIn({ setDataToken }) {
       };
     });
   }
+  console.log(dataForm.password);
   console.log(dataForm);
   async function handleSubmit(e) {
     e.preventDefault();
@@ -38,17 +39,16 @@ export default function SignIn({ setDataToken }) {
     }
   }
 
-async function signInWithEmail() {
-  const { data, error } = await supabase.auth.signInWithOtp({
-    email: dataForm.email,
-    options: {
-      // set this to false if you do not want the user to be automatically signed up
-      shouldCreateUser: true,
-      emailRedirectTo: 'https://nobik-auth.netlify.app/acc',
-    },
-  })
-}
-
+  async function signInWithEmail() {
+    const { data, error } = await supabase.auth.signInWithOtp({
+      email: dataForm.email,
+      options: {
+        // set this to false if you do not want the user to be automatically signed up
+        shouldCreateUser: true,
+        emailRedirectTo: "https://nobik-auth.netlify.app/acc",
+      },
+    });
+  }
 
   return (
     <>
