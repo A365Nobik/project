@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
-import SmallPass from "../components/SmalPass";
 
 export default function SignUp() {
   const [dataForm, setDataForm] = useState({

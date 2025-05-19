@@ -5,6 +5,8 @@ import SignIn from "./pages/signin";
 import NotFound from "./pages/NotFound";
 import AccPage from "./pages/AccPage";
 import Home from "./pages/Home";
+import ResetPass from "./pages/ResetPass";
+import UpdatePass from "./pages/UpdatePass";
 
 export default function App() {
   const [token, setToken] = useState(null);
@@ -30,12 +32,14 @@ export default function App() {
         <Route path="/" element={<Home token={token} />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn setDataToken={setToken} />} />
-        <Route path="*" element={<NotFound />} />
         {token ? (
           <Route path="/acc" element={<AccPage token={token} />}></Route>
         ) : (
           ""
         )}
+        <Route path="/reset-pass" element={<ResetPass/>} />
+        <Route path="/update-pass" element={<UpdatePass/>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

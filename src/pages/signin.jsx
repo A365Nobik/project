@@ -1,6 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "../client";
+import { MdEmail } from "react-icons/md";
+import { FaLock } from "react-icons/fa";
+
 export default function SignIn({ setDataToken }) {
   const [dataForm, setDataForm] = useState({
     email: "",
@@ -62,24 +65,35 @@ export default function SignIn({ setDataToken }) {
             onSubmit={handleSubmit}
             className="flex flex-col justify-center items-center gap-2"
           >
-            <input
-              className="border-[#1a1a1a] border-2 outline-0"
-              onChange={handleChange}
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
-            <input
-              className="border-[#1a1a1a] border-2 outline-0"
-              onChange={handleChange}
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
+            <div className="flex justify-center items-center gap-1">
+              <input
+                className="border-[#1a1a1a] border-2 outline-0"
+                onChange={handleChange}
+                type="email"
+                name="email"
+                placeholder="Email"
+              />
+              <MdEmail />
+            </div>
+            <div className="flex justify-center items-center gap-1">
+              <input
+                className="border-[#1a1a1a] border-2 outline-0"
+                onChange={handleChange}
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
+              <FaLock />
+            </div>
             <button className="bg-[#1a1a1a] p-1 rounded-md" type="submit">
               Login
             </button>
           </form>
+          <button onClick={()=>{
+            navigate('/reset-pass')
+          }} className="bg-[#1a1a1a] p-1 m-1 mt-2 rounded-md" type="submit">
+            Reset my password
+          </button>
           <div className="flex flex-col justify-center items-center">
             <p>Don't have an account?</p>
             <Link
