@@ -32,7 +32,7 @@ export default function Home({ token }) {
           )}
         </div>
       </main>
-      <footer className=" flex  gap-3 justify-center items-center">
+      <footer className=" flex  gap-3 justify-center items-center relative bottom-25">
         Created by A365Nobik with
         <a
           target="_blank"

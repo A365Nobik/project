@@ -52,13 +52,13 @@ async function signInWithEmail() {
 
   return (
     <>
-      <footer className="flex justify-center items-center ">
+      <header className="flex justify-center items-center ">
         <h1 className="font-bold text-5xl bg-[#1a1a1a] p-3 rounded-2xl">
           Login
         </h1>
-      </footer>
-      <main className="flex justify-center items-center h-screen text-4xl ">
-        <div className="flex flex-col justify-center items-center text-#ffffffde border-solid border-3 px-2 py-6 rounded-2xl border-[#1a1a1a] sm:t ">
+      </header>
+      <main className="flex justify-center items-center h-screen text-4xl">
+        <div className="flex flex-col justify-center items-center text-#ffffffde border-solid border-3 px-2 py-6 rounded-2xl border-[#1a1a1a] signin  ">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col justify-center items-center gap-2"

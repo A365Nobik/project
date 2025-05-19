@@ -50,20 +50,20 @@ export default function SignUp() {
 
   return (
     <>
-      <footer className="flex justify-center items-center ">
+      <header className="flex justify-center items-center ">
         <h1 className="font-bold text-5xl bg-[#1a1a1a] p-3 rounded-2xl">
           Register
         </h1>
-      </footer>
-      <main className="flex justify-center items-center h-screen text-4xl  w-screen ">
-        <div className="flex justify-center items-center flex-col border-solid border-3 py-10 sm:text-red rounded-2xl border-[#1a1a1a] w-screen ">
+      </header>
+      <main className="flex justify-center items-center h-screen text-4xl  m-auto ">
+        <div className="flex justify-center items-center flex-col border-solid border-3 py-10 sm:text- rounded-2xl border-[#1a1a1a] signup ">
           <form
             className="flex justify-center items-center flex-col gap-2 "
             onSubmit={handleSubmitEmail}
           >
             <div
               className="flex flex-col justify-center items-center
-            gap-2 ml-5 pr-3"
+            gap-2 ml-5 pr-3 "
             >
               <div className="gap-1 flex justify-center items-center">
                 <input

@@ -10,16 +10,20 @@ export default function Home({ token }) {
   }
   return (
     <>
-      <footer className="flex justify-center items-center ">
+      <header className="flex justify-center items-center ">
         <h1 className="font-bold text-5xl bg-[#1a1a1a] p-3 rounded-2xl">
           Account Page
         </h1>
-      </footer>
+      </header>
       <main className="flex flex-col justify-center items-center h-screen text-3xl">
-        <div className="flex flex-col justify-center items-center">
-          <h1>Welcome, {token.user.user_metadata.name}</h1>
-          {showData?<UserData token={token} />:""}
-          <button onClick={handleClick} className="bg-[#1a1a1a] p-1 rounded-md">
+        <div className="flex flex-col justify-center items-center acc">
+          <h1 className="">Welcome, {token.user.user_metadata.name}</h1>
+          <hr className=" w-50 mb-2" />
+          {showData ? <UserData token={token} /> : ""}
+          <button
+            onClick={handleClick}
+            className="bg-[#1a1a1a] p-1 rounded-md mt-2"
+          >
             Show my data
           </button>
         </div>
@@ -30,17 +34,19 @@ export default function Home({ token }) {
           >
             Home
           </Link>
-          <a
-            href="/"
-            className="bg-[#1a1a1a] p-1 rounded-md"
-            onClick={() => {
-              sessionStorage.removeItem("token");
-            }}
-          >
-            Logout
-          </a>
         </div>
       </main>
+      <footer className="flex justify-center items-center relative bottom-50 ">
+        <a
+          href="/"
+          className="bg-[#1a1a1a] p-1 text-2xl rounded-md"
+          onClick={() => {
+            sessionStorage.removeItem("token");
+          }}
+        >
+          Logout
+        </a>
+      </footer>
     </>
   );
 }
