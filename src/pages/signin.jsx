@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "../client";
-import SmallPass from "../components/SmalPass";
 export default function SignIn({ setDataToken }) {
   const [dataForm, setDataForm] = useState({
     email: "",
