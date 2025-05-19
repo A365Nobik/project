@@ -21,7 +21,7 @@ export default function SignIn() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+       const { data, error } = await supabase.auth.signInWithPassword({
         email: dataForm.email,
         password: dataForm.password,
       });

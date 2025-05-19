@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../client";
-import { data, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaPhoneFlip } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
@@ -14,6 +14,8 @@ export default function SignUp() {
     phone: "",
   });
   const [phone, setPhone] = useState(false);
+  const navigate = useNavigate();
+
   function handleClick() {
     setPhone(!phone);
   }
@@ -37,6 +39,8 @@ export default function SignUp() {
           name: dataForm.name,
         },
       });
+      console.log("Navigate");
+      await navigate("/home");
       if (error) throw error;
     } catch (error) {
       alert(error.message);
@@ -62,6 +66,7 @@ export default function SignUp() {
       });
       if (error) throw error;
       console.log(data);
+      navigate("/");
       if (dataForm.email === "") alert("Please enter email");
       else alert("Check your Email");
       if (dataForm.name === "") alert("Please enter name");
