@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../client";
 import { Link, useNavigate } from "react-router-dom";
-import { FaPhoneFlip } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
@@ -13,12 +12,8 @@ export default function SignUp() {
     email: "",
     phone: "",
   });
-  const [phone, setPhone] = useState(false);
   const navigate = useNavigate();
 
-  function handleClick() {
-    setPhone(!phone);
-  }
   console.log(dataForm);
   function handleChange(event) {
     setDataForm((prevFormData) => {
@@ -27,29 +22,6 @@ export default function SignUp() {
         [event.target.name]: event.target.value,
       };
     });
-  }
-  async function handleSubmitPhone(a) {
-    a.preventDefault();
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        phone: dataForm.phone,
-        password: dataForm.password,
-        options: {
-          channel: "whatsapp",
-          name: dataForm.name,
-        },
-      });
-      console.log("Navigate");
-      await navigate("/home");
-      if (error) throw error;
-    } catch (error) {
-      alert(error.message);
-      console.log(data);
-      if (dataForm.email === "") alert("Please enter Phone");
-      else alert("Check your Phone");
-      if (dataForm.name === "") alert("Please enter name");
-      if (dataForm.password === "") alert("Please enter password");
-    }
   }
 
   async function handleSubmitEmail(e) {
@@ -77,74 +49,76 @@ export default function SignUp() {
   }
 
   return (
-    <div className="flex justify-center items-center flex-col">
-      <form
-        className="flex justify-center items-center flex-col gap-2"
-        onSubmit={!phone ? handleSubmitEmail : handleSubmitPhone}
-      >
-        <h1 className=" bg-[#1a1a1a] p-1 rounded-2xl font-bold text-lg">
+    <>
+      <footer className="flex justify-center items-center ">
+        <h1 className="font-bold text-5xl bg-[#1a1a1a] p-3 rounded-2xl">
           Register
         </h1>
-        <div
-          className="flex flex-col justify-center items-center
-        gap-1 ml-5"
-        >
-          <div className="gap-1 flex justify-center items-center">
-            <input
-              className="border-[#1a1a1a] border-2 outline-0"
-              type="text"
-              name="name"
-              placeholder="Name"
-              onChange={handleChange}
-            />
-            <FaUser />
-          </div>
+      </footer>
+      <main className="flex justify-center items-center h-screen text-4xl  w-screen ">
+        <div className="flex justify-center items-center flex-col border-solid border-3 py-10 sm:text-red rounded-2xl border-[#1a1a1a] w-screen ">
+          <form
+            className="flex justify-center items-center flex-col gap-2 "
+            onSubmit={handleSubmitEmail}
+          >
+            <div
+              className="flex flex-col justify-center items-center
+            gap-2 ml-5 pr-3"
+            >
+              <div className="gap-1 flex justify-center items-center">
+                <input
+                  className="border-[#1a1a1a] border-2 outline-0"
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  onChange={handleChange}
+                />
+                <FaUser />
+              </div>
 
-          <div className="gap-1 flex justify-center items-center">
-            <input
-              className="border-[#1a1a1a] border-2 outline-0"
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={handleChange}
-            />
-            <FaLock />
+              <div className="gap-1 flex justify-center items-center">
+                <input
+                  className="border-[#1a1a1a] border-2 outline-0"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+                />
+                <FaLock />
+              </div>
+              <div className="gap-1 flex justify-center items-center">
+                <input
+                  className="border-[#1a1a1a] border-2 outline-0"
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  onChange={handleChange}
+                />
+                <MdEmail />
+              </div>
+            </div>
+            <button className="bg-[#1a1a1a] p-1 m-2 rounded-md" type="submit">
+              Register
+            </button>
+          </form>
+          <div className="flex  gap-2">
+            <p>Have an Account?</p>
+            <Link
+              className="border-solid hover:border-b-1 w-max text-center  text-blue-500"
+              to={"/sign-in"}
+            >
+              Login
+            </Link>
           </div>
-          <div className="gap-1 flex justify-center items-center">
-            <input
-              className="border-[#1a1a1a] border-2 outline-0"
-              type={!phone ? "text" : "number"}
-              name={!phone ? "email" : "phone"}
-              placeholder={!phone ? "Email" : "Phone"}
-              onChange={handleChange}
-            />
-            {!phone ? (
-              <MdEmail onClick={handleClick} />
-            ) : (
-              <FaPhoneFlip onClick={handleClick} />
-            )}
-          </div>
+          <hr className="w-50 mt-2 " />
+          <Link
+            className="flex justify-self-center border-solid hover:border-b-1 w-max text-center text-blue-500"
+            to={"/"}
+          >
+            Home
+          </Link>
         </div>
-        <button className="bg-[#1a1a1a] p-1 rounded-md" type="submit">
-          Register
-        </button>
-      </form>
-      <div className="flex  gap-2">
-        <p>Have an Account?</p>
-        <Link
-          className="border-solid hover:border-b-1 w-max text-center"
-          to={"/sign-in"}
-        >
-          Login
-        </Link>
-      </div>
-      <hr className="w-50 mt-2" />
-      <Link
-        className="flex justify-self-center border-solid hover:border-b-1 w-max text-center"
-        to={"/"}
-      >
-        Home
-      </Link>
-    </div>
+      </main>
+    </>
   );
 }
