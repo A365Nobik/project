@@ -8,7 +8,7 @@ export default function SignIn() {
     password: "",
   });
 
-  let navigate = useNavigate()
+  let navigate = useNavigate();
   function handleChange(event) {
     setDataForm((prevFormData) => {
       return {
@@ -21,13 +21,17 @@ export default function SignIn() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-       const { data, error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email: dataForm.email,
         password: dataForm.password,
       });
       console.log(data);
       if (error) alert(error);
-      navigate("/home");
+      if (data.user === null && data.session === null) {
+        alert("User is not defined!");
+      } else {
+        navigate("/home");
+      }
     } catch (error) {
       alert(error.message);
     }
