@@ -4,7 +4,7 @@ import { supabase } from "../client";
 import { MdEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
 
-export default function SignIn({ setDataToken }) {
+export default function SignIn({ setDataToken, admin }) {
   const [dataForm, setDataForm] = useState({
     email: "",
     password: "",

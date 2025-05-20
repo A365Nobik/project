@@ -11,7 +11,7 @@ import Admin from "./pages/Admin";
 
 export default function App() {
   const [token, setToken] = useState(null);
-
+  const [admin, setAdmin] = useState(false);
   useEffect(() => {
     const storedToken = sessionStorage.getItem("token");
     if (storedToken) {
@@ -27,20 +27,30 @@ export default function App() {
     }
   }, [token]);
 
+  useEffect(() => {
+    if (token?.user?.email === "admin@gmail.com") {
+      setAdmin(true);
+    } else {
+      setAdmin(false);
+    }
+  }, [token]);
   return (
     <>
       <Routes>
         <Route path="/" element={<Home token={token} />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/sign-in" element={<SignIn setDataToken={setToken} />} />
+        <Route
+          path="/sign-in"
+          element={<SignIn admin={admin} setDataToken={setToken} />}
+        />
         {token ? (
           <Route path="/acc" element={<AccPage token={token} />}></Route>
         ) : (
           ""
         )}
-        <Route path="/reset-pass" element={<ResetPass/>} />
-        <Route path="/update-pass" element={<UpdatePass/>} />
-        <Route path="/admin" element={<Admin/>} />
+        <Route path="/reset-pass" element={<ResetPass />} />
+        <Route path="/update-pass" element={<UpdatePass />} />
+        {admin ? <Route path="/admin" element={<Admin />}></Route> : ""}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

@@ -10,6 +10,7 @@ export default function Admin() {
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
   const serviceRoleKey = import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY;
   const [allUssShow, setAllUssShow] = useState(false);
+  const [usDataShow, setUsDataShow] = useState(false);
   const supabase = createClient(supabaseUrl, serviceRoleKey, {
     auth: {
       autoRefreshToken: false,
@@ -35,12 +36,12 @@ export default function Admin() {
       if (error) throw error;
       setUssData(users);
       console.log(ussData);
-      // console.log(users);
     } catch (error) {
       alert(error);
     }
   }
   async function getUsById() {
+    setUsDataShow(!usDataShow);
     try {
       const { data, error } = await supabase.auth.admin.getUserById(usId);
       if (error) throw error;
@@ -62,7 +63,15 @@ export default function Admin() {
       setCreateDate(null);
     }
   }
-
+  async function deleteUser() {
+    try {
+      const { data, error } = await supabase.auth.admin.deleteUser(usId);
+      if (error) throw error;
+      console.log(data);
+    } catch (error) {
+      alert(error);
+    }
+  }
   return (
     <>
       <header className="flex flex-col justify-center items-center text-center gap-1">
@@ -78,8 +87,8 @@ export default function Admin() {
           SupaBase Dashboard
         </a>
       </header>
-      <main className="flex justify-center items-center m-10 text-4xl overflow-y-visible">
-        <div className="flex flex-col justify-center items-center">
+      <main className="flex justify-center items-center mt-3 text-4xl w-auto">
+        <div className="flex flex-col justify-center items-center w-auto">
           <div className="flex flex-col gap-1 justify-center items-center">
             <input
               onChange={handleChange}
@@ -102,8 +111,8 @@ export default function Admin() {
             >
               Get Users
             </button>
-            {usData && (
-              <div className=" flex flex-col justify-center items-center mt-4 pt-0 p-4 bg-[#1a1a1a] rounded-lg text-white">
+            {usData && usDataShow && (
+              <div className=" flex flex-col   justify-center items-center mt-4 pt-0 p-4 bg-[#1a1a1a] rounded-lg text-white">
                 <h1 className="bg-[#242424] rounded-2xl p-1">User data</h1>
                 <h1>User Id: {usData.user.id}</h1>
                 <h1>User Email: {usData.user.email}</h1>
@@ -125,16 +134,25 @@ export default function Admin() {
                 <h1>
                   Last SignIn: {signDate ? signDate.toLocaleString() : "Never"}
                 </h1>
+                <hr className="w-full m-1" />
+                <div className="flex justify-center items-center">
+                  <button
+                    className="bg-[#242424] p-1 m-2 rounded-md"
+                    onClick={deleteUser}
+                  >
+                    Delete User
+                  </button>
+                </div>
               </div>
             )}
 
             {allUssShow && ussData && (
-              <div className="flex flex-col justify-center items-center mt-4 pt-0 p-4 bg-[#1a1a1a] rounded-lg text-white">
+              <div className="flex flex-col w-auto justify-between items-center mt-4 pt-0 p-4 bg-[#1a1a1a] rounded-lg text-white">
                 <h1>All Users</h1>
                 {ussData.map((user, index) => (
                   <div
                     key={user.id}
-                    className="flex flex-col justify-center items-center border-2 border-gray-500 border-solid m-2 p-2"
+                    className="flex col-2 gap-2 text-2xl text-center h-auto w-auto justify-center items-center border-2 border-gray-500 border-solid m-2 p-2"
                   >
                     <h1>User №{index + 1}</h1>
                     <h1>User Id: {user.id}</h1>
