@@ -189,6 +189,7 @@ export default function Admin() {
       try {
         const { data, error } = await supabase.auth.admin.createUser({
           email: newUsEmail,
+          email_confirm: true,
           password: newUsPass,
           user_metadata: { name: newUsName },
         });
@@ -414,7 +415,7 @@ gap-1 justify-center items-center"
                 {ussData.map((user, index) => (
                   <div
                     key={user.id}
-                    className="flex col-2 gap-2 text-2xl text-center h-auto w-auto justify-center items-center border-2 border-gray-500 border-solid m-2 p-2"
+                    className="flex col-2  gap-2 text-2xl text-center h-auto w-full justify-center items-center border-2 border-gray-500 border-solid m-2 p-2"
                   >
                     <h1>User №{index + 1}</h1>
                     <h1>User Id: {user.id}</h1>

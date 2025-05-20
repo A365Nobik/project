@@ -8,7 +8,6 @@ export default function Home({ token  }) {
   function handleClick() {
     setShowData(!showData);
   }
-  console.log();
   return (
     <>
       {token.session.user.email==='admin@gmail.com' ? navigate("/admin") : ""}
