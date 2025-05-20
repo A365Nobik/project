@@ -19,7 +19,6 @@ export default function ResetPass() {
       if (error) throw error;
       alert("Check your email");
       console.log(data);
-      navigate("/update-pass");
     } catch (error) {
       console.log(error);
     }
