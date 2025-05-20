@@ -7,6 +7,7 @@ import AccPage from "./pages/AccPage";
 import Home from "./pages/Home";
 import ResetPass from "./pages/ResetPass";
 import UpdatePass from "./pages/UpdatePass";
+import Admin from "./pages/Admin";
 
 export default function App() {
   const [token, setToken] = useState(null);
@@ -39,6 +40,7 @@ export default function App() {
         )}
         <Route path="/reset-pass" element={<ResetPass/>} />
         <Route path="/update-pass" element={<UpdatePass/>} />
+        <Route path="/admin" element={<Admin/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

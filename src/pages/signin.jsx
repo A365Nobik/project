@@ -29,6 +29,7 @@ export default function SignIn({ setDataToken }) {
         password: dataForm.password,
       });
       console.log(data);
+
       if (error) alert(error);
       if (data.user === null && data.session === null) {
         alert("User is not defined!");
@@ -41,16 +42,16 @@ export default function SignIn({ setDataToken }) {
     }
   }
 
-  async function signInWithEmail() {
-    const { data, error } = await supabase.auth.signInWithOtp({
-      email: dataForm.email,
-      options: {
-        // set this to false if you do not want the user to be automatically signed up
-        shouldCreateUser: true,
-        emailRedirectTo: "https://nobik-auth.netlify.app/acc",
-      },
-    });
-  }
+  // async function signInWithEmail() {
+  //   const { data, error } = await supabase.auth.signInWithOtp({
+  //     email: dataForm.email,
+  //     options: {
+  //       // set this to false if you do not want the user to be automatically signed up
+  //       shouldCreateUser: true,
+  //       emailRedirectTo: "https://nobik-auth.netlify.app/acc",
+  //     },
+  //   });
+  // }
 
   return (
     <>
@@ -89,9 +90,13 @@ export default function SignIn({ setDataToken }) {
               Login
             </button>
           </form>
-          <button onClick={()=>{
-            navigate('/reset-pass')
-          }} className="bg-[#1a1a1a] p-1 m-1 mt-2 rounded-md" type="submit">
+          <button
+            onClick={() => {
+              navigate("/reset-pass");
+            }}
+            className="bg-[#1a1a1a] p-1 m-1 mt-2 rounded-md"
+            type="submit"
+          >
             Reset my password
           </button>
           <div className="flex flex-col justify-center items-center">

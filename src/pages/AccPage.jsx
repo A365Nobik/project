@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserData from "../components/UserData";
 
 export default function Home({ token }) {
   const [showData, setShowData] = useState(false);
-
+  let navigate = useNavigate();
   function handleClick() {
     setShowData(!showData);
   }
   return (
     <>
+      {token.session.user.email==='admin@gmail.com' ? navigate("/admin") : ""}
       <header className="flex justify-center items-center ">
         <h1 className="font-bold text-5xl bg-[#1a1a1a] p-3 rounded-2xl">
           Account Page

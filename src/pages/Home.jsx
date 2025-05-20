@@ -24,7 +24,7 @@ export default function Home({ token }) {
             </Link>
           </div>
           {token ? (
-            <Link className="hover:border-b-1  text-blue-500" to={"/acc"}>
+            <Link className="hover:border-b-1  text-blue-500" to={token.session.user.email==='admin@gmail.com'?"/admin":'/acc'}>
               My account Page
             </Link>
           ) : (
