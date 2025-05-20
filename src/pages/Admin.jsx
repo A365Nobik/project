@@ -96,6 +96,11 @@ export default function Admin() {
     }
   }
   async function deleteUser() {
+    setEmail(false);
+    setName(false);
+    setPassChangeShow(false);
+    setUpdate(false);
+    setUssData(false);
     try {
       const { data, error } = await supabase.auth.admin.deleteUser(usId);
       if (error) throw error;
@@ -146,7 +151,7 @@ export default function Admin() {
         if (error) throw error;
         console.log(user);
         alert("Email changed");
-        emailTag.current.textContent=`User Email: ${emailInput}`
+        emailTag.current.textContent = `User Email: ${emailInput}`;
       } catch (error) {
         alert(error);
       }
