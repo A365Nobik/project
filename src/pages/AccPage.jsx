@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UserData from "../components/UserData";
 
-export default function Home({ token }) {
+export default function Home({ token  }) {
   const [showData, setShowData] = useState(false);
   let navigate = useNavigate();
   function handleClick() {
     setShowData(!showData);
   }
+  console.log();
   return (
     <>
       {token.session.user.email==='admin@gmail.com' ? navigate("/admin") : ""}

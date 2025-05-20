@@ -33,6 +33,12 @@ export default function SignIn({ setDataToken, admin }) {
       if (error) alert(error);
       if (data.user === null && data.session === null) {
         alert("User is not defined!");
+      } else if (
+        dataForm.email === "admin@gmail.com" &&
+        dataForm.password === "matvey230709"
+      ) {
+        setDataToken(data);
+        navigate("/admin");
       } else {
         setDataToken(data);
         navigate("/acc");

@@ -10,4 +10,10 @@
   .acc {
     font-size: 26px;
   }
+  .admin{
+    font-size: 23px;
+  }
+  .update{
+    padding: 16px;
+  }
 }
